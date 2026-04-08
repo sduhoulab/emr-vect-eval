@@ -21,7 +21,7 @@ warnings.filterwarnings('ignore')
 device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
 print(f"Using device: {device}")
 
-total_emr = pd.read_excel("top_10_diseases_data_cleaned.xlsx", engine='openpyxl')
+total_emr = pd.read_excel("emr.xlsx", engine='openpyxl')
 labels = total_emr['standard_name']
 total_emr.drop(['id_num', 'tdate'], axis=1, inplace=True)
 total_emr.drop("standard_name", axis=1, inplace=True)
