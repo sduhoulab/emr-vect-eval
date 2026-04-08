@@ -42,14 +42,3 @@ python downstream_evaluation.py
 Access to the raw 81,299 hospitalization records is subject to institutional approval and data-use agreements. More details can be found on the [official portal](http://www.mhdata.sdu.edu.cn/cheeloolead.htm).
 
 ---
-
-## Installation
-
-```bash
-# Clone the repository
-git clone [https://github.com/yourusername/EMRVectEval.git](https://github.com/yourusername/EMRVectEval.git)
-cd EMRVectEval
-
-# Install required packages
-pip install torch transformers datasets pandas numpy scikit-learn tqdm openpyxl joblib matplotlib
-```
