@@ -1,156 +1,55 @@
-📄 Paper Title
+# Self-supervision and domain specific representation learning for evaluating electronic medical records: a large-scale study based on over 80,000 hospitalization records
 
-Short one-line description of your paper’s contribution.
+[![Python 3.8+](https://img.shields.io/badge/python-3.8+-blue.svg)](https://www.python.org/downloads/)
+[![PyTorch](https://img.shields.io/badge/PyTorch-%23EE4C2C.svg?style=flat&logo=PyTorch&logoColor=white)](https://pytorch.org/)
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 
-Authors:
-	•	Name 1
-	•	Name 2
-	•	Name 3
+## Overview
 
-Affiliation: Institution / Lab Name
+This repository provides the implementation for a large-scale study evaluating clinical semantic embeddings. Using 81,299 standardized inpatient records (2012–2020) from the **Cheeloo LEAD** database, we compared four strategies: direct pre-training, embedding models, self-supervised continual pre-training, and supervised fine-tuning.
 
-Links:
-	•	📘 Paper: [arXiv / DOI link]
-	•	🌐 Project Page: [optional]
-	•	📊 Dataset: [optional]
+---
 
-⸻
+## Repository Structure
 
-🧠 Overview
+The core implementation is divided into three functional scripts. Please follow this execution order:
 
-Provide a concise summary of:
-	•	The problem you address
-	•	Why it matters
-	•	Your main contributions
+### 1. Self-Supervised Domain Adaptation
+This script performs domain adaptation of a pre-trained language model (RoBERTa/BERT) using unlabeled EMR admission records via Masked Language Modeling (MLM).
+```bash
+python self_supervised.py
+```
 
-Example:
+### 2. Supervised Fine-Tuning (SFT)
+This script trains the model on clinical text using the specific labeled disease categories chosen for your study. It creates a task-specific classifier based on the clinical narratives.
+```bash
+python supervised_classification.py
+```
 
-We propose a novel method for X that improves Y by leveraging Z. Our approach achieves state-of-the-art performance on…
+### 3. Downstream Evaluation & Interpretability
+This script extracts clinical embeddings and runs multiple benchmarks, including:
+* Unsupervised Clustering (K-Means, Agglomerative).
+* Fairness Analysis across demographics (Age, Sex).
+```bash
+python downstream_evaluation.py
+```
 
-⸻
+---
 
-✨ Contributions
-	•	Contribution 1 (method, theory, or dataset)
-	•	Contribution 2
-	•	Contribution 3
+## Datasets
 
-⸻
+**Source:** Cheeloo Lifespan EHR Academic Database (Cheeloo LEAD)  
+Access to the raw 81,299 hospitalization records is subject to institutional approval and data-use agreements. More details can be found on the [official portal](http://www.mhdata.sdu.edu.cn/cheeloolead.htm).
 
-🏗️ Repository Structure
+---
 
-.
-├── src/                # Core implementation
-├── configs/            # Experiment configs
-├── data/               # (Optional) dataset instructions or samples
-├── scripts/            # Training / evaluation scripts
-├── results/            # Output results / logs
-├── notebooks/          # Jupyter notebooks (optional)
-└── README.md
+## Installation
 
+```bash
+# Clone the repository
+git clone [https://github.com/yourusername/EMRVectEval.git](https://github.com/yourusername/EMRVectEval.git)
+cd EMRVectEval
 
-⸻
-
-⚙️ Installation
-
-Requirements
-	•	Python >= X.X
-	•	CUDA (if applicable)
-	•	Other dependencies
-
-Setup
-
-git clone https://github.com/username/repo-name.git
-cd repo-name
-pip install -r requirements.txt
-
-
-⸻
-
-📊 Dataset
-
-Describe:
-	•	Dataset name(s)
-	•	How to download / preprocess
-
-# Example
-bash scripts/download_data.sh
-
-
-⸻
-
-🚀 Usage
-
-Training
-
-python train.py --config configs/train.yaml
-
-Evaluation
-
-python evaluate.py --checkpoint path/to/model
-
-
-⸻
-
-📈 Results
-
-Method	Dataset	Metric	Score
-Ours	XYZ	Acc	XX.X
-
-Optional:
-	•	Include plots or figures
-	•	Link to full logs
-
-⸻
-
-🔬 Reproducibility
-	•	Random seed(s):
-	•	Hardware used:
-	•	Training time:
-
-⸻
-
-🧪 Ablation Study (Optional)
-
-Summarize key ablation insights.
-
-⸻
-
-📚 Citation
-
-If you find this work useful, please cite:
-
-@article{yourpaper2026,
-  title={Paper Title},
-  author={Author1 and Author2 and Author3},
-  journal={Conference / Journal Name},
-  year={2026}
-}
-
-
-⸻
-
-🤝 Contributing
-
-Describe how others can contribute:
-	•	Issues
-	•	Pull requests
-	•	Coding standards
-
-⸻
-
-📜 License
-
-Specify license (e.g., MIT, Apache 2.0).
-
-⸻
-
-🙏 Acknowledgements
-	•	Funding sources
-	•	Collaborators
-	•	Prior work
-
-⸻
-
-📬 Contact
-	•	Email: your@email.com
-	•	GitHub Issues for questions
+# Install required packages
+pip install torch transformers datasets pandas numpy scikit-learn tqdm openpyxl joblib matplotlib
+```
