@@ -41,7 +41,7 @@ if torch.cuda.is_available():
     torch.backends.cudnn.deterministic = True
     torch.backends.cudnn.benchmark = False
 
-config = AutoConfig.from_pretrained("/home/yuanfuchong/dianzi/pre_trained_models/ehealth/ehealth/config.json")
+config = AutoConfig.from_pretrained("/your_model/config.json")
 
 device = 'cuda' if torch.cuda.is_available() else 'cpu'
 print(f"Using device: {device}")
@@ -580,7 +580,7 @@ def nn_classifier(filtered_df, unique_label_count, vector_name="Vectors_A.xlsx",
     I used 2 models from the huggingface. So if you want to use the model from the hugging face
     just upload it to the new folder and provide the path. 
 """
-model_name = "ehealth"
+model_name = "your_model"
 tokenizer = AutoTokenizer.from_pretrained(model_name)
 model = AutoModel.from_pretrained(model_name)
 model.to(device)
